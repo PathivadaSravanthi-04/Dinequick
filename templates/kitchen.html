@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kitchen</title>
+</head>
+<body>
+
+<h1>Kitchen Dashboard</h1>
+
+{% for order in orders %}
+
+<div>
+
+<h3>
+Order #{{ order.id }}
+</h3>
+
+<p>
+Table: {{ order.table_no }}
+</p>
+
+<p>
+₹{{ order.total }}
+</p>
+
+<p>
+{{ order.status }}
+</p>
+
+<a href="/update_status/{{ order.id }}">
+Update Status
+</a>
+
+<hr>
+
+</div>
+
+{% endfor %}
+
+</body>
+</html>

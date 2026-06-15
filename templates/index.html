@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DineQuick</title>
+
+<style>
+
+body{
+    background-color:#ffd6e7;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+    font-family:Arial, sans-serif;
+}
+
+.container{
+    text-align:center;
+}
+
+.food-images{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.food-images img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:15px;
+    border:3px solid white;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.3);
+}
+
+h1{
+    color:black;
+    font-size:45px;
+    font-weight:bold;
+    margin-bottom:30px;
+}
+
+.table-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+}
+
+label{
+    font-size:22px;
+    font-weight:bold;
+}
+
+input{
+    padding:10px;
+    width:120px;
+    font-size:18px;
+}
+
+button{
+    margin-top:25px;
+    padding:10px 25px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="food-images">
+
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
+
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591">
+
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+
+    </div>
+
+    <h1>WELCOME TO DINEQUICK</h1>
+
+    <form action="/menu" method="GET">
+
+        <div class="table-row">
+
+            <label>Table Number:</label>
+
+            <input
+                type="number"
+                name="table_no"
+                min="1"
+                required>
+
+        </div>
+
+        <button type="submit">
+            Enter
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
