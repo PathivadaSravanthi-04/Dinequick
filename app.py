@@ -144,7 +144,7 @@ def place_order():
     conn.close()
 
     return redirect(url_for(
-    "bill",
+    "order_status",
     order_id=order_id
 ))
 

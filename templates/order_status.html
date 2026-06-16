@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Status</title>
+    <title>Order Successful</title>
+
+    <style>
+        body{
+            background-color:#ffd6e7;
+            font-family:Arial, sans-serif;
+            text-align:center;
+            padding-top:150px;
+        }
+
+        h1{
+            color:green;
+            font-size:50px;
+        }
+
+        h2{
+            color:black;
+            font-size:35px;
+        }
+
+        p{
+            font-size:25px;
+            font-weight:bold;
+        }
+
+        button{
+            padding:12px 25px;
+            font-size:18px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Order Status</h1>
+    <h1>✅ ORDER SUCCESSFUL</h1>
 
-<h2>Order #{{ order.id }}</h2>
+    <h2>Thank You!</h2>
 
-<p>Table: {{ order.table_no }}</p>
+    <p>Enjoy The Food 🍕🍔☕</p>
 
-<p>Total: ₹{{ order.total }}</p>
+    <br>
 
-<p>Status: {{ order.status }}</p>
-
-<a href="/">
-Back to Menu
-</a>
+    <a href="{{ url_for('bill', order_id=order.id) }}">
+        <button>View Bill</button>
+    </a>
 
 </body>
 </html>
