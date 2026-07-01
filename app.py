@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = "dinequick123"
 
 DATABASE = "database.db"
 
@@ -71,10 +72,56 @@ def init_db():
 # -----------------------------
 # Home Page
 # -----------------------------
-
 @app.route("/")
-def index():
-    return render_template("index.html")
+def home():
+    return render_template("home.html")
+
+
+# -----------------------------
+# Admin Login
+# -----------------------------
+@app.route("/login", methods=["GET", "POST"])
+def admin_login():
+
+    if request.method == "POST":
+
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if username == "admin" and password == "admin123":
+
+            session["admin"] = True
+
+            return redirect(url_for("admin"))
+
+        return "Invalid Username or Password"
+
+    return render_template("admin_login.html")
+@app.route("/customer_login", methods=["GET", "POST"])
+def customer_login():
+
+    if request.method == "POST":
+
+        customer_name = request.form["customer_name"]
+
+        session["customer"] = customer_name
+
+        return redirect(url_for("customer"))
+
+    return render_template("customer_login.html")
+@app.route("/customer")
+def customer():
+
+    if not session.get("customer"):
+        return redirect(url_for("customer_login"))
+
+    return render_template(
+        "index.html",
+        customer=session["customer"]
+    )
+# -----------------------------
+# Customer Menu
+# -----------------------------
 @app.route("/menu")
 def menu():
 
@@ -93,6 +140,8 @@ def menu():
         items=items,
         table_no=table_no
     )
+
+
 
 
 # -----------------------------
@@ -191,7 +240,7 @@ def kitchen():
         "kitchen.html",
         orders=orders
     )
-
+ 
 @app.route("/update_status/<int:order_id>")
 def update_status(order_id):
 
@@ -219,7 +268,8 @@ def update_status(order_id):
     conn.commit()
     conn.close()
 
-    return redirect(url_for("kitchen"))
+    return redirect(url_for("kitchen")
+    )
 
 # -----------------------------
 # Admin Dashboard
@@ -227,6 +277,9 @@ def update_status(order_id):
 
 @app.route("/admin")
 def admin():
+
+    if not session.get("admin"):
+        return redirect(url_for("admin_login"))
 
     conn = get_db()
 
@@ -240,7 +293,6 @@ def admin():
         "admin.html",
         items=items
     )
-
 @app.route("/add_item", methods=["POST"])
 def add_item():
 
